@@ -1,16 +1,18 @@
-#########   PLEASE LOOK AT PREVIOUS COMMIT SUMMARRY   #########
+import PySimpleGUI as sg
 
-import classes
-import tkinter as tk
+sg.theme('DarkBlue16')   # Add a touch of color
+# All the stuff inside your window.
+layout = [  [sg.Text('Some text on Row 1')],
+            [sg.Text('Enter something on Row 2'), sg.InputText()],
+            [sg.Button('Ok'), sg.Button('Cancel')] ]
 
-main = tk.Tk()
-main.title("First Tkinter Window")
-main.geometry("600x400")
+# Create the Window
+window = sg.Window('Window Title', layout)
+# Event Loop to process "events" and get the "values" of the inputs
+while True:
+    event, values = window.read()
+    if event == sg.WIN_CLOSED or event == 'Cancel': # if user closes window or clicks cancel
+        break
+    print('You entered ', values[0])
 
-playerCountEntry2 = classes.Entry_Box(main, "lightblue", "black", ("Courier New CYR", 14), ("Courier New CYR", 16), "How many players are there?", "Submit", 0, 1)
-playerCountEntry2.make_box()
-
-if classes.playerCount > 0:
-    print("hey")
-
-main.mainloop()
+window.close()
